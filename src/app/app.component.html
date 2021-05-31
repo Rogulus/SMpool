@@ -1,0 +1,19 @@
+
+<div *ngIf="!adminIsSet; else loginPage">
+  <app-admin-creator (loginEvent)="adminCreated()"> </app-admin-creator>
+</div>
+<ng-template #loginPage >
+
+  <div *ngIf="! userIsLogged; else homePage">
+    <app-login (loginEvent)="loginPassed()"></app-login>
+  </div>
+
+  <ng-template #homePage>
+    <div class="page">
+    <app-sidemenu></app-sidemenu>
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+    </div>
+  </ng-template>
+</ng-template>
