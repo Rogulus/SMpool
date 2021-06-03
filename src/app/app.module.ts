@@ -35,7 +35,6 @@ const appRoutes: Routes = [
 
 ];
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +51,10 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    StoreModule.forRoot({
+        dsf: userReducer
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
