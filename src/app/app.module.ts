@@ -18,6 +18,9 @@ import { TablesComponent } from './site/tables/tables.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminCreatorComponent } from './site/admin-creator/admin-creator.component';
 
+//http service
+import {HttpClientModule} from '@angular/common/http';
+
 // import { registerContentQuery } from '@angular/core/src/render3/instructions';
 
 
@@ -52,7 +55,8 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

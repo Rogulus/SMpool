@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {APIserviceService} from "./services/apiservice.service";
+import {HttpService} from "./services/http.service";
 
 @Component({
   selector: 'app-root',
@@ -11,9 +11,10 @@ export class AppComponent implements OnInit {
   userIsLogged = false;
   adminIsSet = false;
 
-  constructor(private apiService: APIserviceService) { }
+  constructor(private apiService: HttpService) { }
 
   ngOnInit() {
+    this.adminIsSet = false;
     this.apiService.adminIsSet().subscribe(an => this.adminIsSet = an.isSet);
   }
 
