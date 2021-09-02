@@ -4,7 +4,7 @@
       <div class="form-inner">
         <div class="logo text-uppercase"><span>user</span><strong class="text-primary">Login</strong></div>
         <p>Let's play with the pool!</p>
-        <form method="get" class="text-left form-validate">
+        <form method="get" #loginform="ngForm"  (ngSubmit)="onLoginClick($event)" (click)="onLoginClick($event)" class="text-left form-validate">
           <div class="form-group-material">
             <input id="login-username" type="text" name="loginUsername" required data-msg="Please enter your username" class="input-material">
             <label for="login-username" class="label-material">Username</label>
@@ -15,7 +15,7 @@
           </div>
           <div class="form-group text-center">
             <!-- This should be submit button but I replaced it with <a> for demo purposes-->
-            <button id="login" class="btn btn-primary" (click)="onLoginClick()">Login</button>
+            <button id="login" class="btn btn-primary" >Login</button>
           </div>
 
         </form><a href="#" class="forgot-pass">Forgot Password?</a><small>Do not have an account? </small><a href="register.html" class="signup">Signup</a>

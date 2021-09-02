@@ -27,6 +27,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css",
               "src/assets/dashboard_template/css/custom.css",
               "src/assets/dashboard_template/vendor/bootstrap/css/bootstrap.min.css",
@@ -34,7 +35,7 @@
               "src/assets/dashboard_template/css/fontastic.css",
               "src/assets/dashboard_template/css/grasp_mobile_progress_circle-1.0.0.min.css",
               "src/assets/dashboard_template/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
-              "src/assets/dashboard_template/css/style.default.css"
+              "src/assets/dashboard_template/css/style.sea.css"
             ],
             "scripts": [
               "src/assets/dashboard_template/vendor/jquery/jquery.min.js",
@@ -111,6 +112,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []

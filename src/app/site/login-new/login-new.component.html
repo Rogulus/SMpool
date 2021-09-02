@@ -1,0 +1,80 @@
+<!--
+
+<form [formGroup]="loginForm" >
+
+  <label for="login">Name: </label>
+  <input id="login" type="text" formControlName="nameForm">
+&lt;!&ndash;  <p>Form status: {{ loginForm.status }}</p>&ndash;&gt;
+
+  <label for="password">Password: </label>
+  <input id="password" type="password" formControlName="passwordForm">
+
+  <button (click)="openDialog()">Forgot password?</button>
+  <button type="submit" [disabled]="!loginForm.valid && !loginForm.valid" (click)="loginSubmit($event)">Login</button>
+  <button type="submit" (click)="developmentLogin($event)">Development Login</button>&lt;!&ndash;  todo remove&ndash;&gt;
+
+</form>
+
+
+-->
+
+
+<div class="page login-page">
+  <div class="container">
+    <div class="form-outer text-center d-flex align-items-center justify-content-center">
+      <div class="form-inner">
+        <div class="logo text-uppercase"><span>user</span><strong class="text-primary">Login</strong></div>
+        <p>Let's play with the pool!</p>
+        <form method="get" [formGroup]="loginForm"  class="text-left form-validate">
+          <div class="form-group-material">
+
+            <flash-messages></flash-messages>
+            <input formControlName="nameForm" id="login-username" type="text" name="loginUsername" required data-msg="Please enter your username" class="input-material" placeholder="Username">
+            <!--<label for="login-username" class="label-material">Username</label>-->
+
+<!--            <input type="text" id="name" class="form-control"
+                   formControlName="name" required>-->
+            <div *ngIf="loginForm.get('nameForm').invalid && (loginForm.get('nameForm').touched)"
+                 class=" text-danger">
+              <div *ngIf="loginForm.get('nameForm').errors?.required">
+                Name is required.
+              </div>
+              <div *ngIf="loginForm.get('nameForm').errors?.minlength">
+                Username must be at least 5 characters long.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group-material">
+            <input formControlName="passwordForm" id="login-password" type="password" name="loginPassword" required data-msg="Please enter your password" class="input-material" placeholder="Password">
+            <div *ngIf="loginForm.get('passwordForm').invalid && loginForm.get('passwordForm').touched"
+                 class=" text-danger">
+
+              <div *ngIf="loginForm.get('passwordForm').errors?.required">
+                Password is required.
+              </div>
+              <div *ngIf="loginForm.get('passwordForm').errors?.minlength">
+                Password must be at least 6 characters long.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group text-center">
+            <!-- This should be submit button but I replaced it with <a> for demo purposes-->
+            <button routerLink="/home" [disabled]="!loginForm.valid && !loginForm.valid" (click)="loginSubmit($event)" type="submit" id="login" class="btn btn-primary" >Login</button>
+
+            <div><button routerLink="/home" (click)="developmentLogin($event)" type="submit" id="devLogin" class="btn btn-primary" >development Login</button><!--todo smazat--></div>
+          </div>
+
+        <a style="cursor: pointer" (click)="openDialog()" class="forgot-pass">Forgot Password?</a>
+        <small>Do not have an account? </small><a  routerLink="/register" class="signup">Signup</a>
+        </form>
+      </div>
+
+      <div class="copyrights text-center">
+        <p>Design by <a href="https://bootstrapious.com/p/bootstrap-4-dashboard" class="external">Bootstrapious</a></p>
+        <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpService} from "./services/http.service";
+import {Admin} from "./Objects/Admin"
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,13 @@ import {HttpService} from "./services/http.service";
 export class AppComponent implements OnInit {
   title = 'SMpool';
   userIsLogged = false;
-  adminIsSet = false;
+  admin = new Admin()
 
   constructor(private apiService: HttpService) { }
 
   ngOnInit() {
-    this.adminIsSet = false;
-    this.apiService.adminIsSet().subscribe(an => this.adminIsSet = an.isSet);
+    this.apiService.getAdmin().subscribe(admin => {this.admin.admin_exists = admin.admin_exists;
+      this.admin.name = admin.admin_name });
   }
 
   loginPassed(){
@@ -23,8 +24,7 @@ export class AppComponent implements OnInit {
   }
 
   adminCreated(){
-    this.adminIsSet=true;
+    this.admin.admin_exists=true;
     this.userIsLogged = true;
   }
-
 }
