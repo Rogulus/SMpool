@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpService} from "./services/http.service";
-import {Admin} from "./Objects/Admin"
+import {AuthService} from "./services/auth.service";
+import {Router} from "@angular/router";
+import {AdminService} from "./services/admin.service";
+import {UserService} from "./services/user.service";
 
 @Component({
   selector: 'app-root',
@@ -9,22 +12,35 @@ import {Admin} from "./Objects/Admin"
 })
 export class AppComponent implements OnInit {
   title = 'SMpool';
-  userIsLogged = false;
-  admin = new Admin()
 
-  constructor(private apiService: HttpService) { }
+  constructor(private apiService: HttpService, private auth: AuthService, private router: Router,
+              private adminService: AdminService, private userService: UserService) { }
 
   ngOnInit() {
-    this.apiService.getAdmin().subscribe(admin => {this.admin.admin_exists = admin.admin_exists;
-      this.admin.name = admin.admin_name });
-  }
+/*    if (!this.adminService.exist) {
+      this.router.navigate(['/registerAdmin'])
+      return
+    }*/
 
-  loginPassed(){
-     this.userIsLogged = true;
-  }
+    this.apiService.getAdmin().subscribe(admin => {
+      if (admin.admin_exists) {
+        this.adminService.load(admin.admin_name, admin.admin_email)
+      } else {
+        this.router.navigate(['/registerAdmin'])
+        return
+      }
+      this.auth.userLogged().subscribe(logged => {
+        if (!logged) {
+          this.router.navigate(['/login'])
+        }
+        else{
+          this.userService.refresh()
+          console.log('tady by mela byt veskere load dat, ktera jsou potreba, ne dashboard a tak to si komponenty asi zaridi samotne')
+        }
+      })
 
-  adminCreated(){
-    this.admin.admin_exists=true;
-    this.userIsLogged = true;
+    })
   }
 }
+
+//todo jestli je clovek logged in, tak load vsechny data ze serveru!

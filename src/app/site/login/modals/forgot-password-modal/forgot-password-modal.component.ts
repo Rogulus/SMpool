@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpService} from "../../../../services/http.service";
 import {MatDialogRef} from "@angular/material/dialog";
+import {AdminService} from "../../../../services/admin.service";
 
 
 @Component({
@@ -10,14 +11,14 @@ import {MatDialogRef} from "@angular/material/dialog";
 })
 export class ForgotPasswordModalComponent implements OnInit {
 
-  constructor(private apiService: HttpService, private dialogRef: MatDialogRef<any>) { }
+  constructor(private apiService: HttpService, private dialogRef: MatDialogRef<any>, private admin: AdminService) { }
 
   adminName = ""
   adminEmail = ""
 
   ngOnInit(): void {
-    this.apiService.getAdmin().subscribe(admin => {this.adminName=admin.admin_name;
-    this.adminEmail = admin.admin_email})
+    this.adminName = this.admin.name;
+    this.adminEmail = this.admin.email;
   }
 
   Close(){
