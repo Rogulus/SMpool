@@ -16,6 +16,9 @@ import { TablesComponent } from './site/tables/tables.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from "@angular/material/dialog";
 
+import { IMqttServiceOptions, MqttModule } from "ngx-mqtt";
+import { environment as env } from '../environments/environment';
+
 
 import { RouterModule, Routes } from '@angular/router';
 import { AdminCreatorComponent } from './site/admin-creator/admin-creator.component';
@@ -61,6 +64,14 @@ const appRoutes: Routes = [
 ];
 
 
+const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+  hostname: env.mqtt.server,
+  port: env.mqtt.port,
+  protocol: (env.mqtt.protocol === "wss") ? "wss" : "ws",
+  path: '',
+};
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +101,8 @@ const appRoutes: Routes = [
     MatSliderModule,
     MatDialogModule,
     MatButtonModule,
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
   ],
   providers: [AuthGuard,
     {provide: HTTP_INTERCEPTORS,
