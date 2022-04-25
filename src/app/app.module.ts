@@ -38,6 +38,7 @@ import {AuthGuard} from "./services/auth.guard";
 import { MainComponent } from './layout/main/main.component';
 import {AuthService} from "./services/auth.service";
 import {AdminRegistrationGuard} from "./services/admin-registration.guard";
+import { TokenGenerationComponent } from './site/token-generation/token-generation.component';
 
 
 // import { registerContentQuery } from '@angular/core/src/render3/instructions';
@@ -51,8 +52,9 @@ const appRoutes: Routes = [
     children: [
       { path: 'home', component: HomeComponent},
       { path: 'charts', component : ChartsComponent},
-      { path: 'forms', component : FormsComponent},
+      { path: 'settings', component : FormsComponent},
       { path: 'tables', component : TablesComponent},
+      { path: 'token-generation', component : TokenGenerationComponent},
     ]},
 /*  { path: '',
     redirectTo:'/login',
@@ -68,7 +70,10 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: env.mqtt.server,
   port: env.mqtt.port,
   protocol: (env.mqtt.protocol === "wss") ? "wss" : "ws",
-  path: '',
+  path: '/mqtt',
+  username:'Smpool',
+  password:'Smpoolpass1',
+
 };
 
 
@@ -87,7 +92,8 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     AdminCreatorComponent,
     LoginComponent,
     ForgotPasswordModalComponent,
-    MainComponent
+    MainComponent,
+    TokenGenerationComponent
   ],
   imports: [
     BrowserModule,

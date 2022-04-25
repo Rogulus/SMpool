@@ -11,6 +11,7 @@ import {Get} from "../interfaces/login/get";
 import {AdminRegistration, AdminRegistrationInfo} from "../interfaces/admin/admin-registration";
 import {AuthService} from "./auth.service";
 import {UserService} from "./user.service";
+import {newUserTokenRes} from "../interfaces/user/new-user-token-res";
 
 
 @Injectable({
@@ -135,6 +136,19 @@ export class HttpService {
     }).pipe(catchError(HttpService.handleError)
     )
   }
+
+//get token for new user
+  getNewUserToken(): Observable<newUserTokenRes>{
+    let headers = new HttpHeaders().set('access-control-allow-origin',"http://localhost:5000/*");
+    return this.http.post<newUserTokenRes>(this.url + 'admin/createUser',null,{
+        headers: headers,
+        observe: 'body',
+        responseType: 'json',
+        withCredentials: true
+    }).pipe(catchError(HttpService.handleError)
+    )
+  }
+
 
 
 

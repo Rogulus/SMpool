@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class MqttService {
+export class MyMqttService {
 
   private endpoint: string;
 
@@ -15,8 +15,20 @@ export class MqttService {
     this.endpoint = 'events';
   }
 
-  topic(deviceId: string): Observable<IMqttMessage> {
-    let topicName = `/${this.endpoint}/${deviceId}`;
-    return this._mqttService.observe(topicName);
+  public topic(topic: string): Observable<IMqttMessage> {
+    console.log("snaha o pripojeni");
+    return this._mqttService.observe(topic);
+  }
+
+  public unsafePublish(topic: string, data: string): void {
+    console.log("mqtt sendi start");
+    this._mqttService.unsafePublish(topic, data, {qos: 2, retain: true});
+    console.log("mqtt sendi");
+  }
+
+  public getService(){
+    return this._mqttService;
   }
 }
+
+

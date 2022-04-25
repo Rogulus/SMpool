@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EventDataModel } from 'app/models/event.model';
 import { Subscription } from 'rxjs';
-import { MqttService } from 'src/app/services/mqtt.service';
-import { IMqttMessage } from "ngx-mqtt";
-
+import { MyMqttService } from 'src/app/services/mqtt.service';
+import { IMqttMessage , MqttService} from "ngx-mqtt";
 
 @Component({
   selector: 'app-home',
@@ -11,28 +9,97 @@ import { IMqttMessage } from "ngx-mqtt";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  events: any[];
-  private temperatureTopic: string = "SMpool/pool/luxmeter/lux";
-  subscription: Subscription;
+  //events: any[];
+  private luxTopic: string = "#";//"SMpool/pool/luxmeter/lux";
+  subscription: Subscription | undefined;
 
-  constructor(private readonly eventMqtt: MqttService) { }
+  percentage = 20;
+
+  temp = '--- ';
+  ph = '--- ';
+  surface = '--- ';
+
+  flow = '--- ';
+  lux = '--- ';
+  batLux = '--- ';
+  batTherm = '--- ';
+
+
+  switch = '--- ';
+  switchButtonText = '---';
+  switchState = '';
+
+  constructor(private readonly eventMqtt: MyMqttService) { }
 
   ngOnInit(): void {
-    this.subscribeToTopic();
+    this.subscription = this.eventMqtt.topic('SMpool/pool/thermometer/temperature/#')
+      .subscribe((data: IMqttMessage) => {
+        this.temp = data.payload.toString();
+      });
+
+    this.subscription = this.eventMqtt.topic('SMpool/pool/thermometer/ph/#')
+      .subscribe((data: IMqttMessage) => {
+        this.ph = data.payload.toString();
+      });
+
+    this.subscription = this.eventMqtt.topic('SMpool/pool/thermometer/bat/#')
+      .subscribe((data: IMqttMessage) => {
+        this.batTherm = data.payload.toString();
+      });
+
+    this.subscription = this.eventMqtt.topic('SMpool/pool/switch/surface/#')
+      .subscribe((data: IMqttMessage) => {
+        this.surface = data.payload.toString();
+      });
+
+    this.subscription = this.eventMqtt.topic('SMpool/pool/switch/flow/#')
+      .subscribe((data: IMqttMessage) => {
+        this.flow = data.payload.toString();
+      });
+
+    this.subscription = this.eventMqtt.topic('SMpool/pool/switch/status/#')
+      .subscribe((data: IMqttMessage) => {
+        this.switchState = data.payload.toString();
+        this.switch = this.switchState == 'ON_' ? 'Zapnouto' : 'Vypnuto';
+        this.switchButtonText = this.switchState == 'ON_' ? 'Vypnout' : 'Zapnout';
+        (document.getElementById('switchButton') as HTMLInputElement).disabled = false;
+      });
+
+    this.subscription = this.eventMqtt.topic('SMpool/pool/luxmeter/bat/#')
+      .subscribe((data: IMqttMessage) => {
+        this.batLux = data.payload.toString();
+      });
+
+    this.subscription = this.eventMqtt.topic('SMpool/pool/luxmeter/lux/#')
+      .subscribe((data: IMqttMessage) => {
+        this.lux = data.payload.toString();
+      });
+
+
+    this.eventMqtt.unsafePublish('SMpool/pool/thermometer/temperature', '25');
+    this.eventMqtt.unsafePublish('SMpool/pool/switch/comands', 'ON_');
   }
+
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }
 
-  private subscribeToTopic() {
-    this.subscription = this.eventMqtt.topic(this.temperatureTopic)
-      .subscribe((data: IMqttMessage) => {
-        let item = JSON.parse(data.payload.toString());
-        this.events.push(item);
-      });
+
+  onSwitchClick(event: any) {
+    event.preventDefault()
+
+    let msg = this.switchState == 'ON_' ? 'OFF' : 'ON_';
+    this.eventMqtt.unsafePublish('SMpool/pool/switch/comands', msg);
+    (document.getElementById('switchButton') as HTMLInputElement).disabled = true;
+    (async () => {
+      await new Promise(f => setTimeout(f, 10000));
+      (document.getElementById('switchButton') as HTMLInputElement).disabled = false;
+    })();
   }
+
+
 
 
 }

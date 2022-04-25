@@ -1,0 +1,29 @@
+
+<section class="forms section-padding">
+  <div class="container-fluid">
+    <!-- Page Header-->
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-header d-flex align-items-center">
+            <h4>Token generation form</h4>
+          </div>
+          <div class="card-body">
+            <p>New user needs this token to create an account.</p>
+            <form>
+              <div class="form-group">
+                <button (click)="onGenerateClick($event)" type="submit"  class="btn btn-primary">Generate</button>
+              </div>
+            </form>
+
+            <div style="padding-top:1em" class="card-text" *ngIf="newToken != '' " >
+              <h4 class="text-secondary ">New token: <strong class="text-primary ">{{newToken}}</strong></h4>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

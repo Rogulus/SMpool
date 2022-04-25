@@ -2,11 +2,7 @@ export const environment = {
   production: true,
   hmr: false,
   http: {
-    apiUrl: '<https://api.myweb.com>',
+    apiUrl: '< http://localhost:4200>',
   },
-  mqtt: {
-    server: 'mqtt.myweb.com',
-    protocol: "wss",
-    port: 1883
-  }
+
 };

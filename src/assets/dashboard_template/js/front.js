@@ -31,7 +31,7 @@ $(document).ready(function () {
 
     // ------------------------------------------------------- //
     // Tooltips init
-    // ------------------------------------------------------ //    
+    // ------------------------------------------------------ //
 
     $('[data-toggle="tooltip"]').tooltip()
 
@@ -39,7 +39,7 @@ $(document).ready(function () {
     // Universal Form Validation
     // ------------------------------------------------------ //
 
-    $('.form-validate').each(function() {  
+    $('.form-validate').each(function() {
         $(this).validate({
             errorElement: "div",
             errorClass: 'is-invalid',
@@ -51,7 +51,7 @@ $(document).ready(function () {
                 //console.log(element);
                 if (element.prop("type") === "checkbox") {
                     error.insertAfter(element.siblings("label"));
-                } 
+                }
                 else {
                     error.insertAfter(element);
                 }

@@ -51,9 +51,9 @@ export class LoginComponent implements OnInit {
 
 
   loginSubmit(event: any) {
-    event.preventDefault()
-    const username = this.loginForm.get('nameForm')?.value
-    const password = this.loginForm.get('passwordForm')?.value
+    event.preventDefault();
+    const username = this.loginForm.get('nameForm')?.value;
+    const password = this.loginForm.get('passwordForm')?.value;
     let keepSigned = (document.getElementById('register-agree') as HTMLInputElement).checked;
 
     this.auth.getUserInfo(username, password, keepSigned).subscribe(user => {
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
 
   developmentLogin(event: any) {
     let keepSigned = (document.getElementById('register-agree') as HTMLInputElement).checked;
-    this.auth.getUserInfo('Marek', '123456', keepSigned).subscribe((user: UserLoginRes) => {
+    this.auth.getUserInfo('Rogulus', '123456', keepSigned).subscribe((user: UserLoginRes) => {
       if (!user.requestInfo.exists) {
         this.flashMessage.show('This username does not exist.',
           {cssClass: 'alert alert-danger text-center', timeout: 5000});
