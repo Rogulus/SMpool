@@ -15,6 +15,9 @@ import { TablesComponent } from './site/tables/tables.component';
 
 import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatSliderModule} from "@angular/material/slider";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatDialog} from "@angular/material/dialog";
 
 import { IMqttServiceOptions, MqttModule } from "ngx-mqtt";
 import { environment as env } from '../environments/environment';
@@ -28,8 +31,7 @@ import { AdminCreatorComponent } from './site/admin-creator/admin-creator.compon
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSliderModule} from "@angular/material/slider";
-import {MatDialog} from "@angular/material/dialog";
+
 import { ForgotPasswordModalComponent } from './site/login/modals/forgot-password-modal/forgot-password-modal.component';
 import {MatButtonModule} from "@angular/material/button";
 import {FlashMessagesModule} from "angular2-flash-messages";
@@ -107,6 +109,7 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     MatSliderModule,
     MatDialogModule,
     MatButtonModule,
+    MatSlideToggleModule,
     FlashMessagesModule.forRoot(),
     MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
   ],

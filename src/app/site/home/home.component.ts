@@ -60,8 +60,8 @@ export class HomeComponent implements OnInit {
     this.subscription = this.eventMqtt.topic('SMpool/pool/switch/status/#')
       .subscribe((data: IMqttMessage) => {
         this.switchState = data.payload.toString();
-        this.switch = this.switchState == 'ON_' ? 'Zapnouto' : 'Vypnuto';
-        this.switchButtonText = this.switchState == 'ON_' ? 'Vypnout' : 'Zapnout';
+        this.switch = this.switchState == 'ON_' ? 'ON' : 'OFF';
+        this.switchButtonText = this.switchState == 'ON_' ? 'OFF' : 'ON';
         (document.getElementById('switchButton') as HTMLInputElement).disabled = false;
       });
 

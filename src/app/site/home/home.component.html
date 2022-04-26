@@ -86,16 +86,16 @@
 
         <!-- Bazen-->
         <div class="card data-usage">
-          <h2 class="display h4">Bazén</h2>
+          <h2 class="display h4">Pool</h2>
           <div class="row d-flex align-items-center">
             <div class="col-sm-4">
 <!--              <div id="progress-circle" class="d-flex align-items-center justify-content-center"></div>-->
               <img src="assets/pictures/swimming-pool-svgrepo-com.svg" alt="pool icon" class="img-fluid ">
             </div>
             <div class="col-sm-6">
-              <h5 class="text-secondary">Teplota vody: <strong class="text-primary">{{temp}}°C</strong></h5>
-              <h5 class="text-secondary">pH vody: <strong class="text-primary">{{ph}}</strong></h5>
-              <h5 class="text-secondary">Výška hladiny: <strong class="text-primary">{{surface}}cm</strong></h5>
+              <h5 class="text-secondary">Watter temperature: <strong class="text-primary">{{temp}}°C</strong></h5>
+              <h5 class="text-secondary">Watter pH: <strong class="text-primary">{{ph}}</strong></h5>
+              <h5 class="text-secondary">Watter level: <strong class="text-primary">{{surface}}cm</strong></h5>
             </div>
           </div>
 <!--          <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>-->
@@ -105,14 +105,14 @@
 
         <!-- Ceprpadlo-->
         <div class="card data-usage">
-          <h2 class="display h4">Čerpadlo</h2>
+          <h2 class="display h4">Pump</h2>
           <div class="row d-flex align-items-center">
             <div class="col-sm-4">
               <img src="assets/pictures/motor-svgrepo-com.svg" alt="pool icon" class="img-fluid ">
             </div>
             <div class="col-sm-6">
-              <h5 class="text-secondary">Stav: <strong class="text-primary">{{switch}}</strong></h5>
-              <h5 class="text-secondary">Průtok: <strong class="text-primary">{{flow}}l/m</strong></h5>
+              <h5 class="text-secondary">State: <strong class="text-primary">{{switch}}</strong></h5>
+              <h5 class="text-secondary">Flow: <strong class="text-primary">{{flow}}l/m</strong></h5>
               <button (click)="onSwitchClick($event)" type="submit" id="switchButton" class="btn btn-primary" >{{switchButtonText}}</button>
             </div>
           </div>
@@ -123,13 +123,13 @@
 
         <!-- Luxmetr-->
         <div class="card data-usage">
-          <h2 class="display h4">Solární ohřev</h2>
+          <h2 class="display h4">Solar heating</h2>
           <div class="row d-flex align-items-center">
             <div class="col-sm-4">
               <img src="assets/pictures/solar-energy-svgrepo-com.svg" alt="pool icon" class="img-fluid ">
             </div>
             <div class="col-sm-6">
-              <h5 class="text-secondary">Sluneční svit: <strong class="text-primary">{{lux}}lux</strong></h5>
+              <h5 class="text-secondary">Sunshine: <strong class="text-primary">{{lux}}lux</strong></h5>
             </div>
           </div>
           <!--          <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>-->
@@ -179,7 +179,7 @@
       <div class="col-xl-2 col-md-4 col-6">
         <div class="wrapper count-title d-flex">
           <div class="icon"><i class="icon-bill"></i></div>
-          <div class="name"><strong class="text-uppercase">Solární senzor</strong><span>Stav baterie:</span>
+          <div class="name"><strong class="text-uppercase">Solar sensor</strong><span>Battery:</span>
             <div class="count-number">{{batLux}}%</div>
           </div>
         </div>
@@ -188,7 +188,7 @@
       <div class="col-xl-2 col-md-4 col-6">
         <div class="wrapper count-title d-flex">
           <div class="icon"><i class="icon-bill"></i></div>
-          <div class="name"><strong class="text-uppercase">Plovák</strong><span>Stav baterie:</span>
+          <div class="name"><strong class="text-uppercase">Float</strong><span>Battery:</span>
             <div class="count-number">{{batTherm}}%</div>
           </div>
         </div>

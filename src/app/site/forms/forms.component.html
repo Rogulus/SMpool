@@ -1,3 +1,160 @@
+<section class="forms">
+  <div class="container-fluid">
+
+    <header>
+      <h1 class="h2 display">Automatic functions</h1>
+    </header>
+
+
+
+
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-header d-flex align-items-center">
+          <mat-slide-toggle id="scheduleButton" [(ngModel)]="pumpScheduleEnabled" (change)="onScheduleToggle($event)" [aria-label]="isEnabledPumpSchedule">Pump schedulde
+          </mat-slide-toggle>
+        </div>
+
+        <div *ngIf="pumpScheduleEnabled" class="card-body">
+          <form class="form-inline">
+            <div class="form-group col-sm-3">
+              <h1 class="text-primary ">Start: {{startHour}}:{{startMinute}}:{{startSecond}}</h1>
+            </div>
+            <div class="form-group col-sm-2 d-flex justify-content-center">
+              <mat-slider (change)="startHourChange($event)" thumbLabel min="0" max="23" step="1" [value]="startHour"></mat-slider>
+              <h3 class="text-secondary">Hour</h3>
+            </div>
+            <div class="form-group col-sm-2 d-flex justify-content-center">
+              <mat-slider (change)="startMinuteChange($event)" thumbLabel min="0" max="59" step="1" [value]="startMinute"></mat-slider>
+              <h3 class="text-secondary">Minute</h3>
+            </div>
+            <div class="form-group col-sm-2 d-flex justify-content-center">
+              <mat-slider (change)="startSecondChange($event)" thumbLabel min="0" max="59" step="1" [value]="startSecond"></mat-slider>
+              <h3 class="text-secondary">Second</h3>
+            </div>
+          </form>
+
+          <form class="form-inline">
+            <div class="form-group col-sm-3">
+              <h1 class="text-primary ">Stop: {{stopHour}}:{{stopMinute}}:{{stopSecond}}</h1>
+            </div>
+            <div class="form-group col-sm-2 d-flex justify-content-center">
+              <mat-slider (change)="stopHourChange($event)" thumbLabel min="0" max="23" step="1" [value]="stopHour"></mat-slider>
+              <h3 class="text-secondary">Hour</h3>
+            </div>
+            <div class="form-group col-sm-2 d-flex justify-content-center">
+              <mat-slider (change)="stopMinuteChange($event)" thumbLabel min="0" max="59" step="1" [value]="stopMinute"></mat-slider>
+              <h3 class="text-secondary">Minute</h3>
+            </div>
+            <div class="form-group col-sm-2 d-flex justify-content-center">
+              <mat-slider (change)="stopSecondChange($event)" thumbLabel min="0" max="59" step="1" [value]="stopSecond"></mat-slider>
+              <h3 class="text-secondary">Second</h3>
+            </div>
+          </form>
+
+          <form class="form-inline">
+            <div class="form-group col-sm-2">
+              <button type="submit" (click)="onScheduleSubmit()" class="mr-3 btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-header d-flex align-items-center">
+          <mat-slide-toggle [(ngModel)]="solarHeatingEnabled" (change)="onSolarHeatingToggle($event)"
+                            [aria-label]="isEnabledSolarHeating">Solar heating</mat-slide-toggle>
+        </div>
+        <div *ngIf="solarHeatingEnabled" class="card-body">
+          <form class="form-inline">
+            <div class="form-group col-sm-5">
+              <h1 class="text-primary ">Desired temperature: {{desiredDegrees}}°C</h1>
+            </div>
+            <div class="form-group col-sm-2 d-flex justify-content-center">
+              <mat-slider (change)="desiredDegrsesChange($event)" thumbLabel min="15" max="35" step="1" [value]="desiredDegrees"></mat-slider>
+              <h3 class="text-secondary">°C</h3>
+            </div>
+          </form>
+
+          <form class="form-inline">
+            <div class="form-group col-sm-5">
+              <h1 class="text-primary ">Light intensity treshold: {{wattTreshold}}W/m<sup>2</sup></h1>
+            </div>
+            <div class="form-group col-sm-2 d-flex justify-content-center">
+              <mat-slider (change)="wattTresholdChange($event)" thumbLabel min="0" max="800" step="10" [value]="wattTreshold"></mat-slider>
+              <h3 class="text-secondary">W/m<sup>2</sup></h3>
+            </div>
+          </form>
+
+          <form class="form-inline">
+          <div class="form-group col-sm-2">
+            <button (click)="onSolarHeatingSubmit()" type="submit"  class="mr-3 btn btn-primary">Submit</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-header d-flex align-items-center">
+          <h4>Watter level</h4>
+        </div>
+        <div class="card-body">
+          <form class="form-inline">
+            <div class="form-group col-sm-5">
+              <h1 class="text-primary">Current watter level: {{watterLevel}}cm</h1>
+            </div>
+          </form>
+          <form class="form-inline">
+            <div class="form-group col-sm-5">
+              <button (click)="onWatterLevelSetDefault()" type="submit" class="mr-3 btn btn-primary">Set current level as default</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+<!--    <div class="line"></div>
+    <div class="form-group row">
+      <label class="col-sm-1 form-control-label">Automatické spínání</label>
+      <div class="col-sm-10">
+        <div class="row">
+          <div class="col-md-1">
+            <input type="text" placeholder=".col-md-2" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <input type="text" placeholder=".col-md-3" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <input type="text" placeholder=".col-md-4" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>-->
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+<!--
+
+
 <div class="breadcrumb-holder">
   <div class="container-fluid">
     <ul class="breadcrumb">
@@ -8,9 +165,9 @@
 </div>
 <section class="forms">
   <div class="container-fluid">
-    <!-- Page Header-->
+    &lt;!&ndash; Page Header&ndash;&gt;
     <header>
-      <h1 class="h3 display">Forms            </h1>
+      <h1 class="h3 display">Forms</h1>
     </header>
     <div class="row">
       <div class="col-lg-6">
@@ -98,7 +255,7 @@
           </div>
           <div class="card-body text-center">
             <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Form in simple modal </button>
-            <!-- Modal-->
+            &lt;!&ndash; Modal&ndash;&gt;
             <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
               <div role="document" class="modal-dialog">
                 <div class="modal-content">
@@ -425,3 +582,4 @@
     </div>
   </div>
 </section>
+-->
