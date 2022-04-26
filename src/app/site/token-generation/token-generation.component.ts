@@ -20,7 +20,7 @@ export class TokenGenerationComponent implements OnInit {
     event.preventDefault();
     this.newToken = '';
     this.http.getNewUserToken().subscribe(token => {
-      this.newToken = token.accessToken + ':::'+ token.username;
+      this.newToken = token.username;
     })
 
 

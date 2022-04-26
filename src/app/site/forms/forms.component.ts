@@ -83,7 +83,7 @@ export class FormsComponent implements OnInit {
     this.desiredDegrees = event.value;
   }
 
-  wattTresholdChange(event:any){
+  wattThresholdChange(event:any){
     this.wattTreshold = event.value;
   }
 

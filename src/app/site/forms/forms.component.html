@@ -84,10 +84,10 @@
 
           <form class="form-inline">
             <div class="form-group col-sm-5">
-              <h1 class="text-primary ">Light intensity treshold: {{wattTreshold}}W/m<sup>2</sup></h1>
+              <h1 class="text-primary ">Light intensity threshold: {{wattTreshold}}W/m<sup>2</sup></h1>
             </div>
             <div class="form-group col-sm-2 d-flex justify-content-center">
-              <mat-slider (change)="wattTresholdChange($event)" thumbLabel min="0" max="800" step="10" [value]="wattTreshold"></mat-slider>
+              <mat-slider (change)="wattThresholdChange($event)" thumbLabel min="0" max="800" step="10" [value]="wattTreshold"></mat-slider>
               <h3 class="text-secondary">W/m<sup>2</sup></h3>
             </div>
           </form>
