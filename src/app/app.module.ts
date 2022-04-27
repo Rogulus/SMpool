@@ -17,6 +17,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSliderModule} from "@angular/material/slider";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialog} from "@angular/material/dialog";
 
 import { IMqttServiceOptions, MqttModule } from "ngx-mqtt";
@@ -110,6 +111,7 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     MatDialogModule,
     MatButtonModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
     FlashMessagesModule.forRoot(),
     MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
   ],

@@ -11,14 +11,15 @@
     <div class="col-lg-8">
       <div class="card">
         <div class="card-header d-flex align-items-center">
-          <mat-slide-toggle id="scheduleButton" [(ngModel)]="pumpScheduleEnabled" (change)="onScheduleToggle($event)" [aria-label]="isEnabledPumpSchedule">Pump schedulde
+          <mat-slide-toggle id="scheduleButton" [(ngModel)]="pumpScheduleEnabled"
+                            [aria-label]="isEnabledPumpSchedule">Pump schedule
           </mat-slide-toggle>
         </div>
 
         <div *ngIf="pumpScheduleEnabled" class="card-body">
           <form class="form-inline">
             <div class="form-group col-sm-3">
-              <h1 class="text-primary ">Start: {{startHour}}:{{startMinute}}:{{startSecond}}</h1>
+              <h2 class="text-primary ">Start: {{startHour}}:{{startMinute}}:{{startSecond}}</h2>
             </div>
             <div class="form-group col-sm-2 d-flex justify-content-center">
               <mat-slider (change)="startHourChange($event)" thumbLabel min="0" max="23" step="1" [value]="startHour"></mat-slider>
@@ -36,7 +37,7 @@
 
           <form class="form-inline">
             <div class="form-group col-sm-3">
-              <h1 class="text-primary ">Stop: {{stopHour}}:{{stopMinute}}:{{stopSecond}}</h1>
+              <h2 class="text-primary ">Stop: {{stopHour}}:{{stopMinute}}:{{stopSecond}}</h2>
             </div>
             <div class="form-group col-sm-2 d-flex justify-content-center">
               <mat-slider (change)="stopHourChange($event)" thumbLabel min="0" max="23" step="1" [value]="stopHour"></mat-slider>
@@ -68,26 +69,26 @@
     <div class="col-lg-8">
       <div class="card">
         <div class="card-header d-flex align-items-center">
-          <mat-slide-toggle [(ngModel)]="solarHeatingEnabled" (change)="onSolarHeatingToggle($event)"
+          <mat-slide-toggle [(ngModel)]="solarHeatingEnabled"
                             [aria-label]="isEnabledSolarHeating">Solar heating</mat-slide-toggle>
         </div>
         <div *ngIf="solarHeatingEnabled" class="card-body">
           <form class="form-inline">
             <div class="form-group col-sm-5">
-              <h1 class="text-primary ">Desired temperature: {{desiredDegrees}}°C</h1>
+              <h2 class="text-primary ">Desired temperature: {{desiredDegrees}}°C</h2>
             </div>
             <div class="form-group col-sm-2 d-flex justify-content-center">
-              <mat-slider (change)="desiredDegrsesChange($event)" thumbLabel min="15" max="35" step="1" [value]="desiredDegrees"></mat-slider>
+              <mat-slider (change)="desiredDegreesChange($event)" thumbLabel min="15" max="35" step="1" [value]="desiredDegrees"></mat-slider>
               <h3 class="text-secondary">°C</h3>
             </div>
           </form>
 
           <form class="form-inline">
             <div class="form-group col-sm-5">
-              <h1 class="text-primary ">Light intensity threshold: {{wattTreshold}}W/m<sup>2</sup></h1>
+              <h2 class="text-primary ">Light intensity threshold: {{wattThreshold}}W/m<sup>2</sup></h2>
             </div>
             <div class="form-group col-sm-2 d-flex justify-content-center">
-              <mat-slider (change)="wattThresholdChange($event)" thumbLabel min="0" max="800" step="10" [value]="wattTreshold"></mat-slider>
+              <mat-slider (change)="wattThresholdChange($event)" thumbLabel min="0" max="800" step="10" [value]="wattThreshold"></mat-slider>
               <h3 class="text-secondary">W/m<sup>2</sup></h3>
             </div>
           </form>
@@ -109,12 +110,20 @@
         <div class="card-body">
           <form class="form-inline">
             <div class="form-group col-sm-5">
-              <h1 class="text-primary">Current watter level: {{watterLevel}}cm</h1>
+              <h2 class="text-primary">Current watter level: {{levelSign}}{{watterLevel}}cm</h2>
+            </div>
+            <div class="form-group col-sm-2 d-flex justify-content-center">
+              <mat-slider (change)="watterLevelChange($event)" thumbLabel min="-50" max="50" step="1" [value]="watterLevel"></mat-slider>
+              <h3 class="text-secondary">cm</h3>
+            </div>
+            <div class="form-group col-sm-1 d-flex justify-content-center"></div>
+            <div class="form-group ">
+              <button (click)="onWatterLevelSetDefault()" type="submit" class="mr-5 btn btn-secondary">Current level as optimum</button>
             </div>
           </form>
           <form class="form-inline">
-            <div class="form-group col-sm-5">
-              <button (click)="onWatterLevelSetDefault()" type="submit" class="mr-3 btn btn-primary">Set current level as default</button>
+            <div class="form-group col-sm-2">
+              <button (click)="onWatterLevelSubmit()" type="submit"  class="mr-3 btn btn-primary">Submit</button>
             </div>
           </form>
         </div>
@@ -122,6 +131,18 @@
     </div>
 
 
+
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-body">
+          <form class="form-inline justify-content-center">
+            <div class="form-group col-sm-5 justify-content-center">
+              <button (click)="onSubmitAll()" type="submit" class=" mr-3 btn btn-primary ">Submit all</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
 <!--    <div class="line"></div>
     <div class="form-group row">

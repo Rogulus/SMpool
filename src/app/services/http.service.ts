@@ -12,6 +12,7 @@ import {AdminRegistration, AdminRegistrationInfo} from "../interfaces/admin/admi
 import {AuthService} from "./auth.service";
 import {UserService} from "./user.service";
 import {newUserTokenRes} from "../interfaces/user/new-user-token-res";
+import {AutomaticFunctionsRes} from "../interfaces/system/automatic-functions-res";
 
 
 @Injectable({
@@ -145,6 +146,29 @@ export class HttpService {
         observe: 'body',
         responseType: 'json',
         withCredentials: true
+    }).pipe(catchError(HttpService.handleError)
+    )
+  }
+
+    putAutomaticFunctionsData(data: AutomaticFunctionsRes): Observable<AutomaticFunctionsRes>{
+    let headers = new HttpHeaders().set('access-control-allow-origin',"http://localhost:5000/*");
+    console.log("jas");
+    return this.http.put<AutomaticFunctionsRes>(this.url + 'pool/automaticFunctions',data,{
+      headers: headers,
+      observe: 'body',
+      responseType: 'json',
+      withCredentials: true
+    }).pipe(catchError(HttpService.handleError)
+    )
+  }
+
+  getAutomaticFunctionsData(): Observable<AutomaticFunctionsRes>{
+    let headers = new HttpHeaders().set('access-control-allow-origin',"http://localhost:5000/*");
+    return this.http.get<AutomaticFunctionsRes>(this.url + 'pool/automaticFunctions' ,{
+      headers: headers,
+      observe: 'body',
+      responseType: 'json',
+      withCredentials: true
     }).pipe(catchError(HttpService.handleError)
     )
   }

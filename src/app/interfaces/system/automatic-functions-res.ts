@@ -18,6 +18,6 @@ interface WatterLevel {
 
 export interface AutomaticFunctionsRes {
   'pumpSchedule': PumpSchedule;
-  'solar_heating': SolarHeating;
+  'solarHeating': SolarHeating;
   'watterLevel': WatterLevel
 }
