@@ -25,13 +25,17 @@ export class AuthService implements HttpInterceptor{
      return this.http.sessionCheck().pipe(
        tap((x:Get) => {
          if(x.requestInfo.loggedIn){
-           console.log('4')
+           console.log(x);
+           console.log('4');
            this.sessionActive = true;
            sessionStorage.setItem('accessToken', x.requestInfo.accessToken)
            this.accessToken = x.requestInfo.accessToken;
            this.userService.load(x.user);
            sessionStorage.setItem('loggedIn', 'true')
          }
+         this.sessionActive = false;
+         console.log('HHHHHH');
+         console.log(this.sessionActive);
       }),
       map<Get, boolean>(x=> this.sessionActive))
   }
@@ -52,7 +56,11 @@ export class AuthService implements HttpInterceptor{
 
   public logout(){
     this.http.deleteSession();
+    console.log('DAVAM SESSION NA FALSE')
     sessionStorage.setItem('loggedIn', 'false');//todo  pri loginu ukladat info jestli pernamentni session
+    console.log(sessionStorage.getItem('loggedIn'));
+    console.log('FAVAM SESSION NA FALSE END');
+    sessionStorage.setItem('accessToken','');
   }
 
   public login(){

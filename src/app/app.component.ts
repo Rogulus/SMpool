@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
       }
       this.auth.userLogged().subscribe(logged => {
         if (!logged) {
+          console.log('NENI LOGED')
           this.router.navigate(['/login'])
         }
         else{
