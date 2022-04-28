@@ -23,8 +23,9 @@ export class AppComponent implements OnInit {
     }*/
 
     this.apiService.getAdmin().subscribe(admin => {
-      if (admin.admin_exists) {
-        this.adminService.load(admin.admin_name, admin.admin_email)
+      console.log(admin);
+      if (admin.adminExists) {
+        this.adminService.load(admin.fullName, admin.email)
       } else {
         this.router.navigate(['/registerAdmin'])
         return

@@ -42,6 +42,8 @@ import { MainComponent } from './layout/main/main.component';
 import {AuthService} from "./services/auth.service";
 import {AdminRegistrationGuard} from "./services/admin-registration.guard";
 import { TokenGenerationComponent } from './site/token-generation/token-generation.component';
+import { UsersComponent } from './site/users/users.component';
+import { ConfirmDeleteComponent } from './site/users/modals/confim-delete/confirm-delete.component';
 
 
 // import { registerContentQuery } from '@angular/core/src/render3/instructions';
@@ -49,15 +51,17 @@ import { TokenGenerationComponent } from './site/token-generation/token-generati
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
-  { path: 'register', component : RegisterComponent},
-  { path: 'registerAdmin', component : AdminCreatorComponent, canActivate: [AdminRegistrationGuard]},
+  { path: 'register', component: RegisterComponent},
+  { path: 'registerAdmin', component: AdminCreatorComponent, canActivate: [AdminRegistrationGuard]},
   { path: 'dashboard', component: MainComponent, canActivate: [AuthGuard],
     children: [
       { path: 'home', component: HomeComponent},
-      { path: 'charts', component : ChartsComponent},
-      { path: 'settings', component : FormsComponent},
-      { path: 'tables', component : TablesComponent},
-      { path: 'token-generation', component : TokenGenerationComponent},
+      { path: 'settings', component: FormsComponent},
+      { path: 'users-overview', component: UsersComponent},
+      { path: 'token-generation', component: TokenGenerationComponent},
+
+      { path: 'tables', component: TablesComponent},
+      { path: 'charts', component: ChartsComponent}
     ]},
 /*  { path: '',
     redirectTo:'/login',
@@ -96,7 +100,9 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     LoginComponent,
     ForgotPasswordModalComponent,
     MainComponent,
-    TokenGenerationComponent
+    TokenGenerationComponent,
+    UsersComponent,
+    ConfirmDeleteComponent
   ],
   imports: [
     BrowserModule,

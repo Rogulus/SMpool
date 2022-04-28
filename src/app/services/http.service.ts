@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, of, throwError} from 'rxjs';
-import {tap,map, catchError} from 'rxjs/operators'
+import {tap, map, catchError, retry} from 'rxjs/operators'
 
 import {admin} from '../interfaces/admin/get'
 import {UserLogin} from '../interfaces/user/userLogin'
@@ -13,6 +13,9 @@ import {AuthService} from "./auth.service";
 import {UserService} from "./user.service";
 import {newUserTokenRes} from "../interfaces/user/new-user-token-res";
 import {AutomaticFunctionsRes} from "../interfaces/system/automatic-functions-res";
+import {GeneralUser} from "../interfaces/general-user";
+import {UserRegistration} from "../interfaces/user/user-registration";
+
 
 
 @Injectable({
@@ -29,6 +32,7 @@ export class HttpService {
 
 
 
+
   response: any
   url ="/api/";
   httpOptions = {
@@ -36,15 +40,28 @@ export class HttpService {
     responseType: 'json'
   }
 
+  retryNum = 3;
+
   constructor(private http:HttpClient) { }
 
+  options():{}{
+  let headers = new HttpHeaders().set('access-control-allow-origin',"http://localhost:5000/*");
+    return {
+      headers: headers,
+      observe: 'body',
+      responseType: 'json',
+      withCredentials: true
+    }
+  }
 
   getAdmin(): Observable<admin> {
     return  this.http.get<admin>(this.url + 'infoAdmin', {
         observe: 'body',
         responseType: 'json'
       }
-    )
+    ).pipe(
+      retry(this.retryNum),
+      catchError(HttpService.handleError))
   }
 
   //post //admin
@@ -74,6 +91,7 @@ export class HttpService {
       observe: 'body',
       responseType: 'json'
     }).pipe(
+      retry(this.retryNum),
       catchError(HttpService.handleError))
   }
 
@@ -87,8 +105,9 @@ export class HttpService {
       observe: 'body',
       responseType: 'json',
       withCredentials: true
-    }).pipe(catchError(HttpService.handleError)
-    )
+    }).pipe(
+      retry(this.retryNum),
+      catchError(HttpService.handleError))
   }
 
   //login
@@ -99,8 +118,9 @@ export class HttpService {
       /*      headers: headers,*/
       observe: 'body',
       responseType: 'json'
-    }).pipe(catchError(HttpService.handleError)
-    )
+    }).pipe(
+      retry(this.retryNum),
+      catchError(HttpService.handleError))
   }
 
   //login delete
@@ -109,7 +129,10 @@ export class HttpService {
       this.http.delete<any>(this.url + 'login',{
       observe: 'body',
       responseType: 'json'
-    }).pipe(catchError(HttpService.handleError)).subscribe(x=>{
+    }).pipe(
+        retry(this.retryNum),
+        catchError(HttpService.handleError))
+        .subscribe(x=>{
       console.log('hotoco delete')
       })
     console.log('delete session')
@@ -118,24 +141,19 @@ export class HttpService {
 
 
   //register
-  registerPost(username: string, adminToken:string, password:string): Observable<UserRegistrationRes>{
-    class UserRegister {
-      username: string = '';
-      adminToken: string = '';
-      password: string = '';
-      constructor(username: string, adminToken: string, password: string) {
-        this.username = username;
-        this.adminToken = adminToken;
-        this.password = password;
-      }
-    }
-    let user = new UserRegister(username, adminToken, password)
-/*    let headers = new HttpHeaders().set('access-control-allow-origin',"http://localhost:5000/!*");*/
-    return this.http.post<UserRegistrationRes>(this.url + 'registration' , user ,{
-      observe: 'body',
-      responseType: 'json'
-    }).pipe(catchError(HttpService.handleError)
-    )
+  registerPost(username: string, adminToken:string, password:string, fullName: string, email:string): Observable<UserRegistrationRes>{
+    let newUser=<UserRegistration>{}
+    newUser.adminToken = adminToken;
+    newUser.username = username;
+    newUser.fullName = fullName;
+    newUser.email = email;
+    newUser.password = password;
+
+    console.log('email' + email);
+    return this.http.post<UserRegistrationRes>(this.url + 'registration' , newUser ,this.options())
+      .pipe(
+        retry(this.retryNum),
+        catchError(HttpService.handleError))
   }
 
 //get token for new user
@@ -146,8 +164,9 @@ export class HttpService {
         observe: 'body',
         responseType: 'json',
         withCredentials: true
-    }).pipe(catchError(HttpService.handleError)
-    )
+    }).pipe(
+      retry(this.retryNum),
+      catchError(HttpService.handleError))
   }
 
     putAutomaticFunctionsData(data: AutomaticFunctionsRes): Observable<AutomaticFunctionsRes>{
@@ -158,8 +177,9 @@ export class HttpService {
       observe: 'body',
       responseType: 'json',
       withCredentials: true
-    }).pipe(catchError(HttpService.handleError)
-    )
+    }).pipe(
+      retry(this.retryNum),
+      catchError(HttpService.handleError))
   }
 
   getAutomaticFunctionsData(): Observable<AutomaticFunctionsRes>{
@@ -169,11 +189,23 @@ export class HttpService {
       observe: 'body',
       responseType: 'json',
       withCredentials: true
-    }).pipe(catchError(HttpService.handleError)
-    )
+    }).pipe(
+      retry(this.retryNum),
+      catchError(HttpService.handleError))
   }
 
 
+  getAllUsers(): Observable<GeneralUser[]>{
+    return this.http.get<GeneralUser[]>(this.url + 'admin/allUsers', this.options())
+      .pipe(catchError(HttpService.handleError))
+  }
+
+  deleteUser(username: string): Observable<GeneralUser[]>{
+    return this.http.delete<GeneralUser[]>(this.url + 'user/'+username, this.options())
+      .pipe(
+        retry(this.retryNum),
+        catchError(HttpService.handleError))
+  }
 
 
 

@@ -1,0 +1,23 @@
+<div id="daily-feeds" class="card mb-0 shadow-none updates daily-feeds">
+
+  <div id="feeds-header" class=" card-header d-flex justify-content-between align-items-center">
+    <h2 class="h5 display ">
+      <a class="font-weight-normal "  aria-controls="feeds-box">Do you really want delete this user?</a></h2>
+  </div>
+
+  <div class="clearfix">
+    <div class="feed d-flex justify-content-between card-body pl-2 ">
+      <div class="feed-body d-flex justify-content-between pl-0 ">
+        <a class="feed-profile "><img src="assets/pictures/admin.svg" alt="Admin" class="img-fluid rounded-circle"></a>
+        <div class="content border-danger"><strong>{{myData.username}}</strong><small>{{myData.email}} </small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button (click)="Delete()" type="submit"  class="m-3 btn btn-primary " >Yes</button>
+  <button (click)="Close()" type="submit"  class="m-3 btn btn-primary " >No</button>
+
+</div>
+
+

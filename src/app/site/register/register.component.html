@@ -14,25 +14,22 @@
           </div>
 
           <div class="form-group-material">
-            <input formControlName="nameForm" id="register-name" type="text" class="input-material" (change)="nameChange()">
-            <label for="register-name" class="label-material">Name</label>
+            <input formControlName="nameForm" id="register-name" placeholder="Name" type="text" class="input-material" (change)="nameChange()">
             <div class="text-danger">{{nameMsg}}</div>
           </div>
 
           <div class="form-group-material">
-            <input formControlName="surnameForm" id="register-surname" type="text" class="input-material" (change)="surnameChange()">
-            <label for="register-surname" class="label-material">Surname</label>
+            <input formControlName="surnameForm" id="register-surname" placeholder="Surname" type="text" class="input-material" (change)="surnameChange()">
             <div class="text-danger">{{surnameMsg}}</div>
           </div>
 
           <div class="form-group-material">
-            <input formControlName="emailForm" id="register-email" type="text" class="input-material" (change)="emailChange()">
-            <label for="register-email" class="label-material">Email</label>
+            <input formControlName="emailForm" id="register-email" placeholder="Email" type="text" class="input-material" (change)="emailChange()">
             <div class="text-danger">{{emailMsg}}</div>
           </div>
 
           <div class="form-group-material">
-            <input formControlName="adminTokenForm"  type="password" name="adminToken" (change)="adminTokenChange()"
+            <input formControlName="adminTokenForm"  type="text" [maxLength]="6"  name="adminToken" (change)="adminTokenChange()"
                    required class="input-material" placeholder="Admin token">
             <div class="text-danger">{{adminTokenMsg}}</div>
           </div>

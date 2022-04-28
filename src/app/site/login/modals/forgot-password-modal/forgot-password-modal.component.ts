@@ -24,6 +24,4 @@ export class ForgotPasswordModalComponent implements OnInit {
   Close(){
     this.dialogRef.close()
   }
-
-
 }

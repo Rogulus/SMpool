@@ -8,7 +8,7 @@ import {UserLoginRes} from '../../interfaces/user/user-login-res'
 import {FlashMessagesService} from "angular2-flash-messages";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
-import {connectableObservableDescriptor} from "rxjs/internal/observable/ConnectableObservable";
+
 
 @Component({
   selector: 'app-login-new',
