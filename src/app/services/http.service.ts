@@ -15,6 +15,7 @@ import {newUserTokenRes} from "../interfaces/user/new-user-token-res";
 import {AutomaticFunctionsRes} from "../interfaces/system/automatic-functions-res";
 import {GeneralUser} from "../interfaces/general-user";
 import {UserRegistration} from "../interfaces/user/user-registration";
+import {GeneralUserPut} from "../interfaces/general_user_put";
 
 
 
@@ -205,6 +206,19 @@ export class HttpService {
       .pipe(
         retry(this.retryNum),
         catchError(HttpService.handleError))
+  }
+
+  putUser(user: GeneralUser, origUsername: string, putPassword: boolean = false, password: string = ''): Observable<AutomaticFunctionsRes>{
+    if(putPassword){
+      let userWithPass = <GeneralUserPut>{ ...user};
+      userWithPass['password'] = password;
+      user = userWithPass;
+    }
+    return this.http.put<AutomaticFunctionsRes>(this.url + 'user/' + origUsername ,user, this.options())
+      .pipe(
+        retry(this.retryNum),
+        catchError(HttpService.handleError)
+      )
   }
 
 

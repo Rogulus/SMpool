@@ -50,26 +50,33 @@
                       </div>
                       <div class="card-body">
 <!--                        <p>Lorem ipsum dolor sit amet consectetur.</p>-->
-                        <form>
+                        <form [formGroup]="userForm">
                           <div class="form-group">
                             <label>Username</label>
-                            <input (change)="onUsernameChange($event)" value={{user.username}} type="text" placeholder="Username" class="form-control">
+                            <input (change)="onUsernameChange($event)" formControlName="usernameForm" value='{{user.username}}' type="text" placeholder="Username" class="form-control">
+                            <div class="text-danger">{{usernameMsg}}</div>
                           </div>
                           <div class="form-group">
                             <label>Name and surname</label>
-                            <input (change)="onFullNameChange($event)" value={{user.fullName}} type="text" placeholder="Name and surname" class="form-control">
+                            <input (change)="onFullNameChange($event)" formControlName="fullNameForm" value="ahoooj" type="text" placeholder="Name and surname" class="form-control">
+                            <div class="text-danger">{{fullNameMsg}}</div>
                           </div>
                           <div class="form-group">
                             <label>Email</label>
-                            <input (change)="onEmailChange($event)" value={{user.email}} type="email" placeholder="Email" class="form-control">
+                            <input (change)="onEmailChange($event)" formControlName="emailForm" value={{user.email}} type="email" placeholder="Email" class="form-control">
+                            <div class="text-danger">{{emailMsg}}</div>
                           </div>
-                          <div class="form-group">
-                            <label>New password</label>
-                            <input (change)="onPasswordChange($event)" vtype="password" placeholder="Password" class="form-control">
-                          </div>
-                          <div class="form-group">
-                            <label>Confirm new password</label>
-                            <input type="password" placeholder="Password" class="form-control">
+                          <div  formGroupName="password" (change)="passwordChange()">
+                            <div class="form-group">
+                              <label>New password</label>
+                              <input (change)="onPasswordChange($event)" formControlName="passwordForm" type="password" placeholder="Password" class="form-control">
+                              <div class="text-danger">{{passwordMsg}}</div>
+                            </div>
+                            <div class="form-group">
+                              <label>Confirm new password</label>
+                              <input (change)="onPasswordRepeatChange($event)"  formControlName="passwordRepeatForm" type="password" placeholder="Password" class="form-control">
+                              <div class="text-danger">{{passwordRepeatMsg}}</div>
+                            </div>
                           </div>
                           <div *ngIf="editedUser.admin" class="form-group ">
                             <input (click)="onAdminStatusChange(false)" type="submit" value="Remove admin status" class="btn btn-outline-danger">
@@ -84,7 +91,8 @@
                             <input (click)="onActivatedStatusChange(true)" type="submit" value="Set as activated" class="btn btn-outline-danger">
                           </div>
                           <div class="form-group d-flex justify-content-center ">
-                            <input (click)="onSubmit(user)" type="submit" value="Submit changes" class="btn btn-primary">
+                            <input [disabled]="!this.userForm.valid || this.formUnchanged || (!this.passwordMatch)" (click)="onSubmit(user)" type="submit" value="Submit changes" class="btn btn-primary">
+<!--                            (!userForm.valid) || (!this.passwordMatch) || (this.formUnchanged)-->
                           </div>
                         </form>
                       </div>

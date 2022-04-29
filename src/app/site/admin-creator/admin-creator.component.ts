@@ -112,7 +112,6 @@ export class AdminCreatorComponent implements OnInit {
   passwordsMatch(){
     const password = this.adminForm.get('password.passwordForm')?.value;
     const repeatedPassword = this.adminForm.get('password.passwordRepeatForm')?.value;
-    console.log(password + ':' +repeatedPassword)
     return password == repeatedPassword;
   }
 
