@@ -44,6 +44,7 @@ import {AdminRegistrationGuard} from "./services/admin-registration.guard";
 import { TokenGenerationComponent } from './site/token-generation/token-generation.component';
 import { UsersComponent } from './site/users/users.component';
 import { ConfirmDeleteComponent } from './site/users/modals/confim-delete/confirm-delete.component';
+import { AccountComponent } from './site/account/account.component';
 
 
 // import { registerContentQuery } from '@angular/core/src/render3/instructions';
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
     children: [
       { path: 'home', component: HomeComponent},
       { path: 'settings', component: FormsComponent},
+      { path: 'account', component: AccountComponent},
       { path: 'users-overview', component: UsersComponent},
       { path: 'token-generation', component: TokenGenerationComponent},
 
@@ -102,7 +104,8 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     MainComponent,
     TokenGenerationComponent,
     UsersComponent,
-    ConfirmDeleteComponent
+    ConfirmDeleteComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

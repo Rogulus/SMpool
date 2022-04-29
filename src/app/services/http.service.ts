@@ -201,8 +201,15 @@ export class HttpService {
       .pipe(catchError(HttpService.handleError))
   }
 
+  getUser(username: string): Observable<GeneralUser>{
+    return this.http.get<GeneralUser>(this.url + 'user/' +  username, this.options())
+      .pipe(
+        retry(this.retryNum),
+        catchError(HttpService.handleError))
+  }
+
   deleteUser(username: string): Observable<GeneralUser[]>{
-    return this.http.delete<GeneralUser[]>(this.url + 'user/'+username, this.options())
+    return this.http.delete<GeneralUser[]>(this.url + 'user/' + username, this.options())
       .pipe(
         retry(this.retryNum),
         catchError(HttpService.handleError))

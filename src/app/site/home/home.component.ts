@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
   constructor(private readonly eventMqtt: MyMqttService) { }
 
   ngOnInit(): void {
+
     this.subscription = this.eventMqtt.topic('SMpool/pool/thermometer/temperature/#')
       .subscribe((data: IMqttMessage) => {
         this.temp = data.payload.toString();
