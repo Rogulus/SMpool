@@ -38,6 +38,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {FlashMessagesModule} from "angular2-flash-messages";
 
 import {AuthGuard} from "./services/auth.guard";
+import {AdminGuard} from "./services/admin-guard.service";
 import { MainComponent } from './layout/main/main.component';
 import {AuthService} from "./services/auth.service";
 import {AdminRegistrationGuard} from "./services/admin-registration.guard";
@@ -59,11 +60,8 @@ const appRoutes: Routes = [
       { path: 'home', component: HomeComponent},
       { path: 'settings', component: FormsComponent},
       { path: 'account', component: AccountComponent},
-      { path: 'users-overview', component: UsersComponent},
-      { path: 'token-generation', component: TokenGenerationComponent},
-
-      { path: 'tables', component: TablesComponent},
-      { path: 'charts', component: ChartsComponent}
+      { path: 'users-overview', component: UsersComponent, canActivate: [AdminGuard]},
+      { path: 'token-generation', component: TokenGenerationComponent, canActivate: [AdminGuard]},
     ]},
 /*  { path: '',
     redirectTo:'/login',

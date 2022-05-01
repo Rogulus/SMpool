@@ -16,6 +16,7 @@ import {AutomaticFunctionsRes} from "../interfaces/system/automatic-functions-re
 import {GeneralUser} from "../interfaces/general-user";
 import {UserRegistration} from "../interfaces/user/user-registration";
 import {GeneralUserPut} from "../interfaces/general_user_put";
+import {OverviewRes} from "../interfaces/system/overview-res";
 
 
 
@@ -184,15 +185,17 @@ export class HttpService {
   }
 
   getAutomaticFunctionsData(): Observable<AutomaticFunctionsRes>{
-    let headers = new HttpHeaders().set('access-control-allow-origin',"http://localhost:5000/*");
-    return this.http.get<AutomaticFunctionsRes>(this.url + 'pool/automaticFunctions' ,{
-      headers: headers,
-      observe: 'body',
-      responseType: 'json',
-      withCredentials: true
-    }).pipe(
+    return this.http.get<AutomaticFunctionsRes>(this.url + 'pool/automaticFunctions' , this.options())
+      .pipe(
       retry(this.retryNum),
       catchError(HttpService.handleError))
+  }
+
+  getOverview(): Observable<OverviewRes>{
+    return this.http.get<OverviewRes>(this.url + 'pool/overview' , this.options())
+      .pipe(
+        retry(this.retryNum),
+        catchError(HttpService.handleError))
   }
 
 

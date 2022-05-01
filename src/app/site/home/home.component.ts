@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MyMqttService } from 'src/app/services/mqtt.service';
 import { IMqttMessage , MqttService} from "ngx-mqtt";
+import {HttpService} from "../../services/http.service";
 
 @Component({
   selector: 'app-home',
@@ -12,8 +13,6 @@ export class HomeComponent implements OnInit {
   //events: any[];
   private luxTopic: string = "#";//"SMpool/pool/luxmeter/lux";
   subscription: Subscription | undefined;
-
-  percentage = 20;
 
   temp = '--- ';
   ph = '--- ';
@@ -29,7 +28,7 @@ export class HomeComponent implements OnInit {
   switchButtonText = '---';
   switchState = '';
 
-  constructor(private readonly eventMqtt: MyMqttService) { }
+  constructor(private readonly eventMqtt: MyMqttService, private http: HttpService) { }
 
   ngOnInit(): void {
 
@@ -73,12 +72,26 @@ export class HomeComponent implements OnInit {
 
     this.subscription = this.eventMqtt.topic('SMpool/pool/luxmeter/lux/#')
       .subscribe((data: IMqttMessage) => {
-        this.lux = data.payload.toString();
+        this.lux = this.lxToWatt(parseInt(data.payload.toString())).toString();
       });
 
+    this.http.getOverview().subscribe(data => {
+      this.temp = data["thermometer/temperature"].toString()
+      this.ph = data["thermometer/ph"].toString()
+      this.surface = data["switch/surface"].toString()
+      this.flow = data["switch/flow"].toString()
+      this.lux = this.lxToWatt(data["luxmeter/lux"]).toString()
+      this.batLux = data["luxmeter/bat"].toString()
+      this.batTherm = data["thermometer/bat"].toString()
+      this.switchState = data['switch/status']? 'ON_' :  'OFF'
+      this.switch = this.switchState == 'ON_' ? 'ON' : 'OFF';
+      this.switchButtonText = this.switchState == 'ON_' ? 'OFF' : 'ON';
 
-    this.eventMqtt.unsafePublish('SMpool/pool/thermometer/temperature', '25');
-    this.eventMqtt.unsafePublish('SMpool/pool/switch/comands', 'ON_');
+    })
+
+
+    //this.eventMqtt.unsafePublish('SMpool/pool/thermometer/temperature', '');
+    // this.eventMqtt.unsafePublish('SMpool/pool/switch/comands', 'ON_');
   }
 
   ngOnDestroy(): void {
@@ -87,6 +100,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  lxToWatt(lx: number){
+    return Math.floor(lx * 0.0079)
+  }
 
   onSwitchClick(event: any) {
     event.preventDefault()

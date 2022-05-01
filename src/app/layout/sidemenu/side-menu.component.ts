@@ -20,7 +20,8 @@ export class SideMenuComponent implements OnInit {
     this.http.sessionCheck().subscribe(res =>{
       this.name = res.user.username;
       this.role = res.user.admin ? 'Admin' : 'User';
-      console.log(res)
+      this.user.load(res.user)
+      //TODO session check by měl být app.component.ts
     })
   }
 

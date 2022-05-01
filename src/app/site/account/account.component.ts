@@ -8,6 +8,8 @@ import {catchError} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {ConfirmDeleteComponent} from "../users/modals/confim-delete/confirm-delete.component";
 import {UserService} from "../../services/user.service";
+import {Router} from "@angular/router";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-account',
@@ -28,7 +30,14 @@ export class AccountComponent implements OnInit {
   })
 
 
-  constructor(private userService: UserService, private fb: FormBuilder, private http: HttpService, private dialog: MatDialog,  private snackBar: MatSnackBar,) { }
+  constructor(private userService: UserService,
+              private fb: FormBuilder,
+              private http: HttpService,
+              private dialog: MatDialog,
+              private snackBar: MatSnackBar,
+              private auth: AuthService,
+              private router: Router
+              ) { }
 
   username = '';
 
@@ -112,7 +121,8 @@ export class AccountComponent implements OnInit {
             ))
           .subscribe(x => {
             this.snackBar.open('Success!','',{duration:3000,panelClass: ['my-snack-bar']});
-            this.ngOnInit();
+            this.auth.logout();
+            this.router.navigate(['/login']);
           });
       }
     })

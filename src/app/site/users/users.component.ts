@@ -91,6 +91,19 @@ export class UsersComponent implements OnInit {
   }
 
   openDelete(user:GeneralUser) {
+    let adminCount = 0;
+    if(user.admin){
+      this.users.forEach(user => {
+        if (user.admin){
+          adminCount++;
+        }
+      })
+      if(adminCount==1){
+        this.snackBar.open("You can't delete last admin!",'',{duration:5000,panelClass: ['my-snack-bar']});
+        return;
+      }
+    }
+
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = user;
     dialogConfig.autoFocus = true;

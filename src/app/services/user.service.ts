@@ -20,6 +20,10 @@ export class UserService{
       this.user = new User(user.admin, user.username, user.fullName, user.email)
   }
 
+  loadValues(admin:boolean, username: string, fullName:string, email:string){
+    this.user = new User(admin, username, fullName, email)
+  }
+
   refresh(){
   //todo? zavolat user get v auth mám token a ten posílám asi
   }

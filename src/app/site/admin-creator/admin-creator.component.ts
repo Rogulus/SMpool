@@ -127,10 +127,10 @@ export class AdminCreatorComponent implements OnInit {
 
     this.http.registerAdmin(username, fullName, email, password).subscribe( x => {
       if(x.adminRegistrationInfo.success){
-            this.auth.login();
-            this.userService.load(x.user);
-            this.adminService.load(x.user.fullName, x.user.email)
-            this.router.navigate(['/dashboard/home'])
+            // this.auth.login();
+            // this.userService.load(x.user);
+            // this.adminService.load(x.user.fullName, x.user.email)
+            this.router.navigate(['/login'])
           }
       })
     //todo a info about admin dodělat checkbox keep me signed in co když se nepovede?

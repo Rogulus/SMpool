@@ -6,50 +6,37 @@
         <p>Welcome to SMpool dashboard! <br>Let's register admin account.</p>
         <form  [formGroup]="adminForm" class="text-left form-validate">
           <div class="form-group-material">
-            <input formControlName="usernameForm" id="register-username" type="text" class="input-material" (change)="usernameChange()">
-            <label for="register-username" class="label-material">Username</label>
+            <input formControlName="usernameForm" id="register-username" type="text" class="input-material" placeholder="Username" (change)="usernameChange()">
             <div class="text-danger">{{usernameMsg}}</div>
           </div>
 
           <div class="form-group-material">
-            <input formControlName="nameForm" id="register-name" type="text" class="input-material" (change)="nameChange()">
-            <label for="register-name" class="label-material">Name</label>
+            <input formControlName="nameForm" id="register-name" type="text" class="input-material" placeholder="Name" (change)="nameChange()">
             <div class="text-danger">{{nameMsg}}</div>
           </div>
 
           <div class="form-group-material">
-            <input formControlName="surnameForm" id="register-surname" type="text" class="input-material" (change)="surnameChange()">
-            <label for="register-surname" class="label-material">Surname</label>
+            <input formControlName="surnameForm" id="register-surname" type="text" class="input-material" placeholder="Surname" (change)="surnameChange()">
             <div class="text-danger">{{surnameMsg}}</div>
           </div>
 
           <div class="form-group-material">
-            <input formControlName="emailForm" id="register-email" type="text" class="input-material" (change)="emailChange()">
-            <label for="register-email" class="label-material">Email</label>
+            <input formControlName="emailForm" id="register-email" type="text" class="input-material"placeholder="Email" (change)="emailChange()">
             <div class="text-danger">{{emailMsg}}</div>
           </div>
 
-          <!--          <div class="form-group-material">
-                      <input id="register-email" type="email" name="registerEmail" required data-msg="Please enter a valid email address" class="input-material">
-                      <label for="register-email" class="label-material">Email Address      </label>
-                    </div>-->
           <div formGroupName="password" (change)="passwordChange()">
             <div class="form-group-material">
-              <input formControlName="passwordForm" id="register-password" type="password" class="input-material" (change)="passwordFirstChange()">
-              <label for="register-password" class="label-material">Password</label>
+              <input formControlName="passwordForm" id="register-password" type="password" class="input-material"  placeholder="Password" (change)="passwordFirstChange()">
               <div class="text-danger">{{passwordMsg}}</div>
             </div>
 
             <div class="form-group-material">
-              <input formControlName="passwordRepeatForm" id="confirm-password" type="password" class="input-material" (change)="passwordRepeatChange()">
-              <label for="confirm-password" class="label-material">Confirm password</label>
+              <input formControlName="passwordRepeatForm" id="confirm-password" type="password" class="input-material"  placeholder="Confirm password" (change)="passwordRepeatChange()">
               <div class="text-danger">{{passwordRepeatMsg}}</div>
             </div>
           </div>
-          <!--          <div class="form-group terms-conditions text-center">
-                      <input id="register-agree" name="registerAgree" type="checkbox" required value="1" data-msg="Your agreement is required" class="form-control-custom">
-                      <label for="register-agree">I agree with the terms and policy</label>
-                    </div>-->
+
           <div class="form-group text-center">
             <input [disabled]="(!adminForm.valid) || (!this.passwordMatch)" id="register" type="submit" value="Register" class="btn btn-primary" (click)="onRegisterClick()">
           </div>

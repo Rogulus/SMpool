@@ -93,9 +93,9 @@
               <img src="assets/pictures/swimming-pool-svgrepo-com.svg" alt="pool icon" class="img-fluid ">
             </div>
             <div class="col-sm-6">
-              <h5 class="text-secondary">Watter temperature: <strong class="text-primary">{{temp}}°C</strong></h5>
+              <h5 class="text-secondary">Watter temperature: <strong class="text-primary">{{temp}} °C</strong></h5>
               <h5 class="text-secondary">Watter pH: <strong class="text-primary">{{ph}}</strong></h5>
-              <h5 class="text-secondary">Watter level: <strong class="text-primary">{{surface}}cm</strong></h5>
+              <h5 class="text-secondary">Watter level: <strong class="text-primary">{{surface}} cm</strong></h5>
             </div>
           </div>
 <!--          <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>-->
@@ -112,7 +112,7 @@
             </div>
             <div class="col-sm-6">
               <h5 class="text-secondary">State: <strong class="text-primary">{{switch}}</strong></h5>
-              <h5 class="text-secondary">Flow: <strong class="text-primary">{{flow}}l/m</strong></h5>
+              <h5 class="text-secondary">Flow: <strong class="text-primary">{{flow}} l/m</strong></h5>
               <button (click)="onSwitchClick($event)" type="submit" id="switchButton" class="btn btn-primary" >{{switchButtonText}}</button>
             </div>
           </div>
@@ -129,7 +129,7 @@
               <img src="assets/pictures/solar-energy-svgrepo-com.svg" alt="pool icon" class="img-fluid ">
             </div>
             <div class="col-sm-6">
-              <h5 class="text-secondary">Sunshine: <strong class="text-primary">{{lux}}lux</strong></h5>
+              <h5 class="text-secondary">Sunshine: <strong class="text-primary">{{lux}} W/m<sup>2</sup></strong></h5>
             </div>
           </div>
           <!--          <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>-->
@@ -180,7 +180,7 @@
         <div class="wrapper count-title d-flex">
           <div class="icon"><i class="icon-bill"></i></div>
           <div class="name"><strong class="text-uppercase">Solar sensor</strong><span>Battery:</span>
-            <div class="count-number">{{batLux}}%</div>
+            <div class="count-number pt-2">{{batLux}}%</div>
           </div>
         </div>
       </div>
@@ -189,7 +189,7 @@
         <div class="wrapper count-title d-flex">
           <div class="icon"><i class="icon-bill"></i></div>
           <div class="name"><strong class="text-uppercase">Float</strong><span>Battery:</span>
-            <div class="count-number">{{batTherm}}%</div>
+            <div class="count-number pt-2">{{batTherm}}%</div>
           </div>
         </div>
       </div>
