@@ -76,17 +76,16 @@ export class HomeComponent implements OnInit {
       });
 
     this.http.getOverview().subscribe(data => {
-      this.temp = data["thermometer/temperature"].toString()
-      this.ph = data["thermometer/ph"].toString()
-      this.surface = data["switch/surface"].toString()
-      this.flow = data["switch/flow"].toString()
-      this.lux = this.lxToWatt(data["luxmeter/lux"]).toString()
-      this.batLux = data["luxmeter/bat"].toString()
-      this.batTherm = data["thermometer/bat"].toString()
-      this.switchState = data['switch/status']? 'ON_' :  'OFF'
-      this.switch = this.switchState == 'ON_' ? 'ON' : 'OFF';
+      this.temp = data["thermometer/temperature"].toString();
+      this.ph = data["thermometer/ph"].toString();
+      this.surface = data["switch/surface"].toString();
+      this.flow = data["switch/flow"].toString();
+      this.lux = this.lxToWatt(data["luxmeter/lux"]).toString();
+      this.batLux = data["luxmeter/bat"].toString();
+      this.batTherm = data["thermometer/bat"].toString();
+      this.switchState = data['switch/status'] == false ? 'ON_' : 'OFF';
+      this.switch = (this.switchState == 'ON_') ? 'ON' : 'OFF';
       this.switchButtonText = this.switchState == 'ON_' ? 'OFF' : 'ON';
-
     })
 
 
