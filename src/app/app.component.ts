@@ -44,5 +44,3 @@ export class AppComponent implements OnInit {
     })
   }
 }
-
-//todo jestli je clovek logged in, tak load vsechny data ze serveru!

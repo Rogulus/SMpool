@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   mqtt: {
-    server: 'f32a355886424b0b9bea85ddd69e2007.s1.eu.hivemq.cloud',
+    server: 'c563ae28a30a49718b670a75ea24b07b.s1.eu.hivemq.cloud',
     protocol: "wss",
     port: 8884
   }

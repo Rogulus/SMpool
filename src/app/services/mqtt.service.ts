@@ -22,7 +22,7 @@ export class MyMqttService {
 
   public unsafePublish(topic: string, data: string): void {
     console.log("mqtt sendi start");
-    this._mqttService.unsafePublish(topic, data, {qos: 2, retain: true});
+    this._mqttService.unsafePublish(topic, data, {qos: 0, retain: true});
     console.log("mqtt sendi");
   }
 

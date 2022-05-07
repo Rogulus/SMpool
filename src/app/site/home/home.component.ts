@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
       this.lux = this.lxToWatt(data["luxmeter/lux"]).toString();
       this.batLux = data["luxmeter/bat"].toString();
       this.batTherm = data["thermometer/bat"].toString();
-      this.switchState = data['switch/status'] == false ? 'ON_' : 'OFF';
+      this.switchState = data['switch/status'] == true ? 'ON_' : 'OFF';
       this.switch = (this.switchState == 'ON_') ? 'ON' : 'OFF';
       this.switchButtonText = this.switchState == 'ON_' ? 'OFF' : 'ON';
     })
