@@ -1,9 +1,14 @@
+/************************************************************
+ *                                                          *
+ *      Author:     Marek Stastny                           *
+ *      Created:    2022                                    *
+ *                                                          *
+ ************************************************************/
+
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {HttpService} from "../../services/http.service";
 import {Router} from "@angular/router";
-import {map, tap} from "rxjs/operators";
-import {AdminRegistration, AdminRegistrationInfo} from "../../interfaces/admin/admin-registration";
 import {AuthService} from "../../services/auth.service";
 import {UserService} from "../../services/user.service";
 import {AdminService} from "../../services/admin.service";
@@ -127,13 +132,9 @@ export class AdminCreatorComponent implements OnInit {
 
     this.http.registerAdmin(username, fullName, email, password).subscribe( x => {
       if(x.adminRegistrationInfo.success){
-            // this.auth.login();
-            // this.userService.load(x.user);
-            // this.adminService.load(x.user.fullName, x.user.email)
             this.router.navigate(['/login'])
           }
       })
-    //todo a info about admin dodělat checkbox keep me signed in co když se nepovede?
   }
 
 }

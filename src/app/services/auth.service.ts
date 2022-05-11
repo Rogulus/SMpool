@@ -1,6 +1,12 @@
+/************************************************************
+ *                                                          *
+ *      Author:     Marek Stastny                           *
+ *      Created:    2022                                    *
+ *                                                          *
+ ************************************************************/
+
 import { Injectable } from '@angular/core';
 import {HttpService} from "./http.service";
-import {UserLoginRes} from '../interfaces/user/user-login-res'
 import {map, tap} from 'rxjs/operators'
 import {Get} from '../interfaces/login/get'
 import {UserService} from "./user.service";
@@ -25,8 +31,6 @@ export class AuthService implements HttpInterceptor{
      return this.http.sessionCheck().pipe(
        tap((x:Get) => {
          if(x.requestInfo.loggedIn){
-           console.log(x);
-           console.log('4');
            this.sessionActive = true;
            sessionStorage.setItem('accessToken', x.requestInfo.accessToken)
            this.accessToken = x.requestInfo.accessToken;
@@ -34,7 +38,6 @@ export class AuthService implements HttpInterceptor{
            sessionStorage.setItem('loggedIn', 'true')
          }
          this.sessionActive = false;
-         console.log('HHHHHH');
          console.log(this.sessionActive);
       }),
       map<Get, boolean>(x=> this.sessionActive))
@@ -56,10 +59,7 @@ export class AuthService implements HttpInterceptor{
 
   public logout(){
     this.http.deleteSession();
-    console.log('DAVAM SESSION NA FALSE')
-    sessionStorage.setItem('loggedIn', 'false');//todo  pri loginu ukladat info jestli pernamentni session
-    console.log(sessionStorage.getItem('loggedIn'));
-    console.log('FAVAM SESSION NA FALSE END');
+    sessionStorage.setItem('loggedIn', 'false');
     sessionStorage.setItem('accessToken','');
   }
 

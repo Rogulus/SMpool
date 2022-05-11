@@ -1,12 +1,18 @@
+/************************************************************
+ *                                                          *
+ *      Author:     Marek Stastny                           *
+ *      Created:    2022                                    *
+ *                                                          *
+ ************************************************************/
+
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, FormControl, Validators} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {FlashMessagesService} from "angular2-flash-messages";
 import {HttpService} from "../../services/http.service";
 import {UserRegistrationRes} from "../../interfaces/user/user-registration-res";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {catchError, retry} from "rxjs/operators";
+import {catchError} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
-import {throwError} from "rxjs";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 

@@ -1,12 +1,17 @@
+/************************************************************
+ *                                                          *
+ *      Author:     Marek Stastny                           *
+ *      Created:    2022                                    *
+ *                                                          *
+ ************************************************************/
+
 import { Component, OnInit } from '@angular/core';
 import {HttpService} from "../../services/http.service";
 import {GeneralUser} from "../../interfaces/general-user";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {ForgotPasswordModalComponent} from "../login/modals/forgot-password-modal/forgot-password-modal.component";
 import {ConfirmDeleteComponent} from "./modals/confim-delete/confirm-delete.component";
 import {catchError} from "rxjs/operators";
 import {Observable, pipe} from "rxjs";
-import {UserRegistrationRes} from "../../interfaces/user/user-registration-res";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {FormBuilder, Validators} from "@angular/forms";
 

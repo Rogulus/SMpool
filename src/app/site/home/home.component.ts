@@ -1,3 +1,11 @@
+/************************************************************
+ *                                                          *
+ *      File:       main.cpp                                *
+ *      Author:     Marek Stastny                           *
+ *      Created:    2022                                    *
+ *                                                          *
+ ************************************************************/
+
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MyMqttService } from 'src/app/services/mqtt.service';
@@ -10,8 +18,6 @@ import {HttpService} from "../../services/http.service";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  //events: any[];
-  private luxTopic: string = "#";//"SMpool/pool/luxmeter/lux";
   subscription: Subscription | undefined;
 
   temp = '--- ';
@@ -87,10 +93,6 @@ export class HomeComponent implements OnInit {
       this.switch = (this.switchState == 'ON_') ? 'ON' : 'OFF';
       this.switchButtonText = this.switchState == 'ON_' ? 'OFF' : 'ON';
     })
-
-
-    //this.eventMqtt.unsafePublish('SMpool/pool/thermometer/temperature', '');
-    // this.eventMqtt.unsafePublish('SMpool/pool/switch/comands', 'ON_');
   }
 
   ngOnDestroy(): void {

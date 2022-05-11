@@ -1,7 +1,13 @@
+/************************************************************
+ *                                                          *
+ *      Author:     Marek Stastny                           *
+ *      Created:    2022                                    *
+ *                                                          *
+ ************************************************************/
+
 import {Injectable} from '@angular/core';
 import {Observable, of, throwError} from 'rxjs';
-import {tap, map, catchError, retry} from 'rxjs/operators'
-
+import { catchError, retry} from 'rxjs/operators'
 import {admin} from '../interfaces/admin/get'
 import {UserLogin} from '../interfaces/user/userLogin'
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
@@ -9,8 +15,6 @@ import {UserLoginRes} from "../interfaces/user/user-login-res";
 import {UserRegistrationRes} from "../interfaces/user/user-registration-res";
 import {Get} from "../interfaces/login/get";
 import {AdminRegistration, AdminRegistrationInfo} from "../interfaces/admin/admin-registration";
-import {AuthService} from "./auth.service";
-import {UserService} from "./user.service";
 import {newUserTokenRes} from "../interfaces/user/new-user-token-res";
 import {AutomaticFunctionsRes} from "../interfaces/system/automatic-functions-res";
 import {GeneralUser} from "../interfaces/general-user";
@@ -31,8 +35,6 @@ export class HttpService {
     login by mel naplnit user data
     put by mel naplnit user data
 */
-
-
 
 
   response: any

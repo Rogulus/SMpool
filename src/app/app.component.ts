@@ -1,3 +1,10 @@
+/************************************************************
+ *                                                          *
+ *      Author:     Marek Stastny                           *
+ *      Created:    2022                                    *
+ *                                                          *
+ ************************************************************/
+
 import { Component, OnInit } from '@angular/core';
 import {HttpService} from "./services/http.service";
 import {AuthService} from "./services/auth.service";
@@ -17,11 +24,6 @@ export class AppComponent implements OnInit {
               private adminService: AdminService, private userService: UserService) { }
 
   ngOnInit() {
-/*    if (!this.adminService.exist) {
-      this.router.navigate(['/registerAdmin'])
-      return
-    }*/
-
     this.apiService.getAdmin().subscribe(admin => {
       console.log(admin);
       if (admin.adminExists) {
@@ -32,12 +34,12 @@ export class AppComponent implements OnInit {
       }
       this.auth.userLogged().subscribe(logged => {
         if (!logged) {
-          console.log('NENI LOGED')
+          console.log('User is not logged')
           this.router.navigate(['/login'])
         }
         else{
           this.userService.refresh()
-          console.log('tady by mela byt veskere load dat, ktera jsou potreba, ne dashboard a tak to si komponenty asi zaridi samotne')
+          console.log('In the future, there should be data loading to services')
         }
       })
 
